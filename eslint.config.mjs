@@ -1,24 +1,31 @@
-import js from '@eslint/js';
-import globals from 'globals';
+import eslint from '@eslint/js';
+import tseslint from 'typescript-eslint';
 
-export default [
+export default tseslint.config(
     {
-        files: ['**/*.js'],
-        ignores: ['**/node_modules/**', '**/dist/**'],
+        ignores: [
+            '**/node_modules/**',
+            '**/dist/*',
+            '**.d.ts'
+        ],
+    },
+    eslint.configs.recommended,
+    ...tseslint.configs.recommended,
+    {
+        files: ['**/*.ts'],
         languageOptions: {
-            ecmaVersion: 'latest',
-            sourceType: 'module',
-            globals: {
-                ...globals.browser,
-            }
+            parser: tseslint.parser,
+            parserOptions: {
+                project: './tsconfig.json'
+            },
         },
         rules: {
-            ...js.configs.recommended.rules,
             'indent': ['error', 4],
             'quotes': ['error', 'single'],
             'semi': ['error', 'always'],
-            'no-unused-vars': 'warn',
+            '@typescript-eslint/no-explicit-any': 'warn',
+            '@typescript-eslint/explicit-function-return-type': 'warn',
             'no-console': 'warn'
         }
     }
-];
+);

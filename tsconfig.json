@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+      "module": "commonjs",
+      "noImplicitAny": true,
+      "removeComments": true,
+      "preserveConstEnums": true,
+      "sourceMap": true,
+      "outDir": "./dist",
+      "baseUrl": ".", 
+      "paths": {
+        "@/*": ["src/*"],
+        "@assets/*": ["src/assets/*"]
+      }
+    }, 
+    "include": ["src/**/*", "globals.d.ts", "webpack.config.ts"],
+    "exclude": ["dist"]
+  }
