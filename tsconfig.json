@@ -12,6 +12,6 @@
         "@assets/*": ["src/assets/*"]
       }
     }, 
-    "include": ["src/**/*", "globals.d.ts", "webpack.config.ts"],
+    "include": ["src/**/*", "globals.d.ts", "*.config.ts"],
     "exclude": ["dist"]
   }

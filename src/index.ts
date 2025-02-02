@@ -78,7 +78,7 @@ container.addEventListener('click', (event) => {
         }
 
         audio.src = card.src;
-        body.style.backgroundImage = card.style.backgroundImage
+        body.style.backgroundImage = card.style.backgroundImage;
         audio.load();
         audio.play();
         if (cardData) {
