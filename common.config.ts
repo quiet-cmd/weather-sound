@@ -1,22 +1,12 @@
-/* eslint-disable @typescript-eslint/no-require-imports */
-import { Configuration as WebpackConfiguration } from 'webpack';
-import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server';
+import * as path from 'path';
+import * as HtmlWebpackPlugin from 'html-webpack-plugin';
+import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import { Configuration } from 'webpack';
+import { Configuration as DevServerConfiguration } from 'webpack-dev-server';
 
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-interface Configuration extends WebpackConfiguration {
-    devServer?: WebpackDevServerConfiguration;
-  }
-
-interface WebpackArgv {
-    mode?: 'development' | 'production';
-}
-
-const config: Configuration = {
+const commonConfig: Configuration & DevServerConfiguration = {
     context: path.resolve(__dirname, 'src'),
-
     entry: './index.ts',
     output: {
         filename: '[name].[contenthash].js',
@@ -88,19 +78,4 @@ const config: Configuration = {
     },
 };
 
-
-module.exports = (env: never, argv: WebpackArgv): Configuration => {
-    if (argv.mode === 'development') {
-        config.devtool = 'eval-source-map';
-        config.devServer = {
-            port: 3000,
-            hot: true,
-            open: true,
-        };
-    }
-    if (argv.mode === 'production') {
-        config.devtool = 'source-map';
-    }
-
-    return  config;
-};
+export default commonConfig; 
